@@ -1,11 +1,9 @@
 # RESULTADOS ELECTORALES NACIONALES - DISTRITO TUCUMÁN
-
+---
 ## 2015
 **Generales**
 - Listas 
 - Resultados
-
----
 
 ## 2017
 
