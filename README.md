@@ -5,7 +5,7 @@ Se incluye en este repositorio datos de resultados electorales provinciales (Gob
 
 ### Elecciones Nacionales
  **Primarias Abiertas Simultáneas y Obligatorias (P.A.S.O)**
- - 2017
+ - 2011, 2017
  
  **Generales**
--  2007, 2009, 2015, 2017
+-  2007, 2009, 2011, 2015, 2017
