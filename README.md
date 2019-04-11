@@ -3,7 +3,7 @@
 Se incluye en este repositorio datos de resultados electorales provinciales (Gobernador, Diputados, Senadores) y nacionales (Diputados y Senadores). 
 
 
-### Elecciones Nacionales
+### Elecciones Nacionales ([repositorio](https://github.com/atlaselectoral/elecciones/tree/master/nacionales))
  **Primarias Abiertas Simultáneas y Obligatorias (P.A.S.O)**
  - 2011, 2013,  2015, 2017
  
