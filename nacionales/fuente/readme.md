@@ -1,6 +1,6 @@
 # Fuentes de datos
 
-La fuente original de datos para resultados de elecciones nacionales (2003 - 2017) provienen del *Atlas Electoral de Andy Tow*. Se puede acceder a ellas en  las sección de **[descargas de su sitio web](https://www.andytow.com/)**. Para acceder es necesario autenticar la consulta a través de una cuenta de *Twitter*. 
+La fuente original de datos para resultados de elecciones nacionales (2003 - 2017) provienen del **_Atlas Electoral de Andy Tow_**. Se puede acceder a ellas en  las sección de **[descargas de su sitio web](https://www.andytow.com/)**. Para acceder es necesario autenticar la consulta a través de una cuenta de *Twitter*. 
 
 ---
 
