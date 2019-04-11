@@ -13,7 +13,7 @@ La fuente original de datos para resultados de elecciones nacionales (2003 - 201
 **(2)** Pasamos del formato original (`mdb`) de *Microsoft Acces* a un formato compatible para trabajar con *software* no propietario. En este caso *sqlite*. Para hacerlo seguimos los siguientes pasos: 
  -  Descargamos este archivo [`mdb2sqlite.sh`](https://raw.githubusercontent.com/atlaselectoral/elecciones/master/nacionales/fuente/mdb2sqlite.sh).
  -  Renombramos el archivo (uno por uno) de la base de datos que se deseabamos transformar (con extensión `mdb`) de esta manera: `migration-export.mdb` 
- -  Correimos el siguiente comando:  `./mdb2sqlite.sh migration-export.mdb`
+ -  Corrimos el siguiente comando:  `./mdb2sqlite.sh migration-export.mdb`
  -  Esperar... y esperar un rato más... y un poco más... 
  - Al final del proceso, dentro de la carepta `sqlite` encontrabamos un archivo nuevo (`db.sqlite3`). 
 
