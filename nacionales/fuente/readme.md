@@ -8,16 +8,12 @@ La fuente original de datos para resultados de elecciones nacionales (2003 - 201
 
 **(1)** Descargamos los archivos para cada una de las elecciones del atlas. 
 
----
-
 **(2)** Pasamos del formato original (`mdb`) de *Microsoft Acces* a un formato compatible para trabajar con *software* no propietario. En este caso *sqlite*. Para hacerlo seguimos los siguientes pasos: 
  -  Descargamos este archivo [`mdb2sqlite.sh`](https://raw.githubusercontent.com/atlaselectoral/elecciones/master/nacionales/fuente/mdb2sqlite.sh).
  -  Renombramos el archivo (uno por uno) de la base de datos que se deseabamos transformar (con extensión `mdb`) de esta manera: `migration-export.mdb` 
  -  Corrimos el siguiente comando:  `./mdb2sqlite.sh migration-export.mdb`
  -  Esperar... y esperar un rato más... y un poco más... 
  - Al final del proceso, dentro de la carepta `sqlite` encontrabamos un archivo nuevo (`db.sqlite3`). 
-
---- 
 
 **(3)** Desde el entorno de `RStudio`corrimos un programa para trabajar con lengauje `SQL` en las múltiples tablas del archivo original (que incluye datos de todos los distritos de Argentina para cada una de las elecciones) y generar un archivo de texto separado por comas (`.csv`) para los datos de interes del distrito Tucumán. 
 
