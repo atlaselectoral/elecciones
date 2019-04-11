@@ -28,7 +28,9 @@ A modo de ejmplo compartimos abajo el código con el que trabajamos para procesa
 * Los archivos resultantes (`.csv`) en el [repositorio](https://github.com/atlaselectoral/elecciones/tree/master/nacionales/resultados). 
 
 
-# EJEMPLO
+# EJEMPLOS
+
+El _notebook_ incluye:
 
 **(1) `R` chunk para establacer la conexion con las bases de datos de
 `SQLite` con resultados electorales**
@@ -48,15 +50,6 @@ provincia**
 -   La columna `depNombre` incluye el nombre de las provinicas, cuyo
     `deoCodigoDepartamento == 999`.
 
-<!-- -->
-
-    SELECT DISTINCT
-    depCodigoDepartamento,
-    depCodigoProvincia,
-    depNombre
-    FROM
-    Departamento
-
 **(3) SQL chunk para traer los partidos (y sus codigos) para una
 eleccion particular**
 
@@ -74,17 +67,6 @@ eleccion particular**
 
 -   Filtrar datos de listas de generales 2013 en Tucunám
 
-<!-- -->
-
-    SELECT DISTINCT
-    vot_parCodigo,
-    parDenominacion
-    FROM
-    VotosCandidaturaDNacionales c INNER JOIN
-    Partidos p ON c.vot_parCodigo = p.parCodigo
-    WHERE
-    vot_proCodigoProvincia = '23'
-
 **(3) SQL chunk con la consulta final de los resultados electorales**
 
 -   Traemos valores absolutos de `listas`, `blancos`, `electores`, y
@@ -97,185 +79,4 @@ eleccion particular**
 -   Guardamos con `output.var` como dataframe. Repetimos proceso
     anterior para exportar como `csv`.
 
-<!-- -->
-
-    WITH votos (vot_proCodigoProvincia, vot_depCodigoDepartamento, vot_mesCodigoCircuito, vot_mesCodigoMesa,
-    "0064",     
-    "0181", 
-    "0186", 
-    "0501",     
-    "0505",         
-    "0542", 
-    "0543")
-    AS
-    (SELECT
-            vot_proCodigoProvincia,
-            vot_depCodigoDepartamento,
-            vot_mesCodigoCircuito,
-            vot_mesCodigoMesa,
-                  max(CASE WHEN vot_parCodigo = "0064"       THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo = "0181"   THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo = "0186"   THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo = "0501"       THEN votVotosPartido END),
-                  max(CASE WHEN vot_parCodigo = "0505"           THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo = "0542"   THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo = "0543"       THEN votVotosPartido END)
-            FROM
-            VotosCandidaturaMesasDNacionales
-            WHERE
-            vot_proCodigoProvincia = '23' --TUCUMAN
-            --AND vot_depCodigoDepartamento = '020' --
-            --AND vot_mesCodigoCircuito in ('0304 ') --
-            GROUP BY
-            vot_proCodigoProvincia,
-            vot_depCodigoDepartamento,
-            vot_mesCodigoCircuito,
-            vot_mesCodigoMesa
-            ORDER BY
-            vot_proCodigoProvincia,
-            vot_depCodigoDepartamento,
-            vot_mesCodigoCircuito,
-            vot_mesCodigoMesa)
-    SELECT
-            vot_proCodigoProvincia AS codprov,
-            depNombre AS depto,
-            mes_depCodigoDepartamento AS coddepto,
-             vot_mesCodigoCircuito AS circuito,
-             vot_mesCodigoMesa AS mesa,
-      --      sum(mesVotosValidos) AS validos,
-            sum(mesElectores) AS electores,
-            sum(mesVotosEnBlanco) AS blancos,
-            sum(mesVotosNulos) AS nulos,
-                  sum("0064") AS "0064", 
-                  sum("0181") AS "0181", 
-                  sum("0186") AS "0186", 
-                  sum("0501") AS "0501",
-                  sum("0505") AS "0505", 
-                  sum("0542") AS "0542", 
-                  sum("0543") AS "0543"
-            FROM
-            votos
-               INNER JOIN MesasDNacionales  ON vot_proCodigoProvincia = mes_proCodigoProvincia 
-                                    AND vot_depCodigoDepartamento = mes_depCodigoDepartamento
-                                    AND vot_mesCodigoCircuito = mesCodigoCircuito
-                                    AND vot_mesCodigoMesa = mesCodigoMesa
-        INNER JOIN Departamento ON vot_proCodigoProvincia = depCodigoProvincia 
-                             AND vot_depCodigoDepartamento = depCodigoDepartamento
-         GROUP BY
-         vot_proCodigoProvincia,
-         vot_depCodigoDepartamento,
-         depNombre, 
-         vot_mesCodigoCircuito,
-         vot_mesCodigoMesa
-         ORDER BY
-         vot_proCodigoProvincia,
-         vot_depCodigoDepartamento,
-         depNombre, 
-         vot_mesCodigoCircuito,
-         vot_mesCodigoMesa;
-
-### PASO
-
--   Repetimos toda la secuencia anterior para otra elección (que
-    necestias de una nueva conexión)
-
--   Aunque la estructura de estas bases de datos es muy similar entre
-    elecciones, de año a año pueden varian algunos nombres de variables.
-    Se puede insepccionar la estructura de las tablas en la pestaña
-    *Connections* de `RStudio`.
-
-<!-- -->
-
-    SELECT DISTINCT
-    vot_parCodigo,
-    parDenominacion
-    FROM
-    VotosCandidaturaDNacionales c INNER JOIN
-    Partidos p ON c.vot_parCodigo = p.parCodigo
-    WHERE
-    vot_proCodigoProvincia = '23'
-
-    WITH votos (vot_proCodigoProvincia, vot_depCodigoDepartamento, vot_mesCodigoCircuito, vot_mesCodigoMesa,
-    "0060",     
-    "0064",     
-    "0181",     
-    "0185",     
-    "0186",     
-    "0188",     
-    "0501",     
-    "0505",  
-    "0542",     
-    "0543" )
-    AS
-    (SELECT
-            vot_proCodigoProvincia,
-            vot_depCodigoDepartamento,
-            vot_mesCodigoCircuito,
-            vot_mesCodigoMesa,
-                  max(CASE WHEN vot_parCodigo ="0060"        THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0064"    THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0181"    THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0185"        THEN votVotosPartido END),
-                  max(CASE WHEN vot_parCodigo ="0186"            THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0188"    THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0501"    THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0505"    THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0542" THEN votVotosPartido END), 
-                  max(CASE WHEN vot_parCodigo ="0543" THEN votVotosPartido END)
-            FROM
-            VotosCandidaturaMesasDNacionales
-            WHERE
-            vot_proCodigoProvincia = '23' --TUCUMAN
-            --AND vot_depCodigoDepartamento = '020' --
-            --AND vot_mesCodigoCircuito in ('0304 ') --
-            GROUP BY
-            vot_proCodigoProvincia,
-            vot_depCodigoDepartamento,
-            vot_mesCodigoCircuito,
-            vot_mesCodigoMesa
-            ORDER BY
-            vot_proCodigoProvincia,
-            vot_depCodigoDepartamento,
-            vot_mesCodigoCircuito,
-            vot_mesCodigoMesa)
-    SELECT
-            vot_proCodigoProvincia AS codprov,
-            depNombre AS depto,
-            mes_depCodigoDepartamento AS coddepto,
-             vot_mesCodigoCircuito AS circuito,
-             vot_mesCodigoMesa AS mesa,
-      --      sum(mesVotosValidos) AS validos,
-            sum(mesElectores) AS electores,
-            sum(mesVotosEnBlanco) AS blancos,
-            sum(mesVotosNulos) AS nulos,
-                  sum("0060") AS "0060", 
-                  sum("0064") AS "0064", 
-                  sum("0181") AS "0181", 
-                  sum("0185") AS "0185",
-                  sum("0186") AS "0186", 
-                  sum("0188") AS "0188", 
-                  sum("0501") AS "0501", 
-                  sum("0505") AS "0505", 
-                  sum("0542") AS "0542", 
-                  sum("0543") AS "0543"
-            FROM
-            votos
-               INNER JOIN MesasDNacionales  ON vot_proCodigoProvincia = mes_proCodigoProvincia 
-                                    AND vot_depCodigoDepartamento = mes_depCodigoDepartamento
-                                    AND vot_mesCodigoCircuito = mesCodigoCircuito
-                                    AND vot_mesCodigoMesa = mesCodigoMesa
-        INNER JOIN Departamento ON vot_proCodigoProvincia = depCodigoProvincia 
-                             AND vot_depCodigoDepartamento = depCodigoDepartamento
-         GROUP BY
-         vot_proCodigoProvincia,
-         vot_depCodigoDepartamento,
-         depNombre, 
-         vot_mesCodigoCircuito,
-         vot_mesCodigoMesa
-         ORDER BY
-         vot_proCodigoProvincia,
-         vot_depCodigoDepartamento,
-         depNombre, 
-         vot_mesCodigoCircuito,
-         vot_mesCodigoMesa;
 
