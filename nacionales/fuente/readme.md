@@ -36,7 +36,7 @@ A modo de ejmplo compartimos abajo el código con el que trabajamos para procesa
 
 ## El _notebook_ incluye:
 
-**(1) `R` chunk para establacer la conexion con las bases de datos de
+**(1) `R` chunk para establacer la conexión con las bases de datos de
 `SQLite` con resultados electorales**
 
 -El codigo para prender las bases de datos no fue ejecutado en el
@@ -46,7 +46,7 @@ preview (`include=FLASE`)
 -   Establecemos la ruta donde se encuentran los archivos
 -   Establecemos la conexión con las bases de datos
 
-**(2) SQL chunk para tener codigo y nombre de departamentos de cada
+**(2) SQL chunk para tener código y nombre de departamentos de cada
 provincia**
 
 -   Los guardo como `data.frame`: `*Deptos_Provincias*`
@@ -54,31 +54,29 @@ provincia**
 -   La columna `depNombre` incluye el nombre de las provinicas, cuyo
     `deoCodigoDepartamento == 999`.
 
-**(3) SQL chunk para traer los partidos (y sus codigos) para una
+**(3) SQL chunk para obtener los nombres de partidos (y sus codigos) para una
 eleccion particular**
 
 -   En las opciones de `sql` la **`connection`** lleva el nombre
-    correspondiente a la base de datos de la eleccion.
+    correspondiente a la base de datos de la elección.
 
--   `vot_pro_CodigoProvincia` (de la tabla anterior, guardada en el
-    enviroment de `R`) para la provincia de Tucumán es el `23`.
+-   `vot_pro_CodigoProvincia` para la provincia de Tucumán es el `23`.
 
--   Si quiero guardarla como `data.frame` de `R` tengo que agregar
-    opcion `output.var = "NombreDataFrame"` en el chunk de `sql`.
+-   Si quiero guardar la consulta como `data.frame` de `R` tengo que agregar
+    opción `output.var = "NombreDataFrame"` en el chunk de `sql`.
 
 -   Luego podemos exportar a `csv` con el siguiente comando:
     `readr::write_csv(NombreDataFrame, "NombreDataFrame.csv")`
 
--   Filtrar datos de listas de generales 2013 en Tucunám
 
 **(4) SQL chunk con la consulta final de los resultados electorales**
 
 -   Traemos valores absolutos de `listas`, `blancos`, `electores`, y
     `validos`.
 
--   Traemos tambien codigos de identificacion de las observacioes a
+-   Traemos tambien códigos de identificación de las observaciones a
     distintos niveles (`mesa`, `circuito`, `departamento` y `provincia`)
-    para poder agrupar.
+    para poder agrupar. Cada fila corresponde a los resultados de una mesa electoral de una elección determinada. 
 
 -   Guardamos con `output.var` como dataframe. Repetimos proceso
     anterior para exportar como `csv`.
