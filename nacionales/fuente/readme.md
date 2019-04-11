@@ -25,16 +25,16 @@ Es importante primero instalar y configurar los `drivers` de las bases de datos 
 
 - Instructivo general del paquete `db` de [RStudio](https://db.rstudio.com/best-practices/drivers/) y para el caso particular de conexiones de [`sqlite`](https://db.rstudio.com/databases/sqlite/).
 
+
+# EJEMPLOS
+
 A modo de ejmplo compartimos abajo el código con el que trabajamos para procesar los datos de las elecciones de 2013. 
 
 * Un [notebook](https://raw.githubusercontent.com/atlaselectoral/elecciones/master/nacionales/fuente/queriesSQL_Tuc2013.Rmd) de `Rmd` que incluye las consultas `SQL` de P.A.S.O. y Generales. 
 
 * Los archivos resultantes (`.csv`) en el [repositorio](https://github.com/atlaselectoral/elecciones/tree/master/nacionales/resultados). 
 
-
-# EJEMPLOS
-
-El _notebook_ incluye:
+## El _notebook_ incluye:
 
 **(1) `R` chunk para establacer la conexion con las bases de datos de
 `SQLite` con resultados electorales**
