@@ -21,6 +21,10 @@ La fuente original de datos para resultados de elecciones nacionales (2003 - 201
 
 **(3)** Desde el entorno de `RStudio`corrimos un programa para trabajar con lengauje `SQL` en las múltiples tablas del archivo original (que incluye datos de todos los distritos de Argentina para cada una de las elecciones) y generar un archivo de texto separado por comas (`.csv`) para los datos de interes del distrito Tucumán. 
 
+Es importante primero instalar y configurar los `drivers` de las bases de datos para poder generar la conexión entre `RStudio`y las mismas y poder hacer las consultas (en esta caso de `sql`). 
+
+- Instructivo general del paquete `db` de [RStudio](https://db.rstudio.com/best-practices/drivers/) y para el caso particular de conexiones de [`sqlite`](https://db.rstudio.com/databases/sqlite/).
+
 A modo de ejmplo compartimos abajo el código con el que trabajamos para procesar los datos de las elecciones de 2013. 
 
 * Un [notebook](https://raw.githubusercontent.com/atlaselectoral/elecciones/master/nacionales/fuente/queriesSQL_Tuc2013.Rmd) de `Rmd` que incluye las consultas `SQL` de P.A.S.O. y Generales. 
@@ -67,7 +71,7 @@ eleccion particular**
 
 -   Filtrar datos de listas de generales 2013 en Tucunám
 
-**(3) SQL chunk con la consulta final de los resultados electorales**
+**(4) SQL chunk con la consulta final de los resultados electorales**
 
 -   Traemos valores absolutos de `listas`, `blancos`, `electores`, y
     `validos`.
