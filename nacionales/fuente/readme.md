@@ -19,7 +19,7 @@ La fuente original de datos para resultados de elecciones nacionales (2003 - 201
 
 Es importante primero instalar y configurar los `drivers` de las bases de datos para poder generar la conexión entre `RStudio`y las mismas y poder hacer las consultas (en esta caso de `sql`). 
 
-- Instructivo general del paquete `db` de [RStudio](https://db.rstudio.com/best-practices/drivers/) y para el caso particular de conexiones de [`sqlite`](https://db.rstudio.com/databases/sqlite/).
+- Instructivo general del paquete `db` de [RStudio](https://db.rstudio.com), [los *drivers*](https://db.rstudio.com/best-practices/drivers/) necesarios y datos específicos para el caso particular de conexiones de [`sqlite`](https://db.rstudio.com/databases/sqlite/).
 
 
 # EJEMPLOS
@@ -35,20 +35,17 @@ A modo de ejmplo compartimos abajo el código con el que trabajamos para procesa
 **(1) `R` chunk para establacer la conexión con las bases de datos de
 `SQLite` con resultados electorales**
 
--El codigo para prender las bases de datos no fue ejecutado en el
-preview (`include=FLASE`)
+-   Cargamos las librerias
+-   Establecimos la ruta donde se encuentran los archivos
+-   Generamos la conexión con las bases de datos
 
--   Primero cargamos las librerias
--   Establecemos la ruta donde se encuentran los archivos
--   Establecemos la conexión con las bases de datos
-
-**(2) SQL chunk para tener código y nombre de departamentos de cada
+**(2) SQL chunk para consultar código y nombre de departamentos de cada
 provincia**
 
--   Los guardo como `data.frame`: `*Deptos_Provincias*`
+-   Guardados como `data.frame` en el entorno (`enviroment`de `RStudio`): `*Deptos_Provincias*`
 
 -   La columna `depNombre` incluye el nombre de las provinicas, cuyo
-    `deoCodigoDepartamento == 999`.
+    `depCodigoDepartamento == 999`, y nos permite ver rápidamente el código de cada provincia.
 
 **(3) SQL chunk para obtener los nombres de partidos (y sus codigos) para una
 eleccion particular**
@@ -56,25 +53,22 @@ eleccion particular**
 -   En las opciones de `sql` la **`connection`** lleva el nombre
     correspondiente a la base de datos de la elección.
 
--   `vot_pro_CodigoProvincia` para la provincia de Tucumán es el `23`.
+-   El código de la provincia - `vot_pro_CodigoProvincia`- para la provincia de Tucumán es el `23`(del *chunk* previo).
 
 -   Si quiero guardar la consulta como `data.frame` de `R` tengo que agregar
-    opción `output.var = "NombreDataFrame"` en el chunk de `sql`.
+    opción `output.var = "NombreDataFrame"` en el *chunk* de `sql`.
 
--   Luego podemos exportar a `csv` con el siguiente comando:
+-   Luego podemos exportar a `csv` con el siguiente comando desde la consola:
     `readr::write_csv(NombreDataFrame, "NombreDataFrame.csv")`
 
 
 **(4) SQL chunk con la consulta final de los resultados electorales**
 
--   Traemos valores absolutos de `listas`, `blancos`, `electores`, y
-    `validos`.
+-   Obtuvimos los valores absolutos de `listas`, `blancos`, `electores`, y `validos`.
 
--   Traemos tambien códigos de identificación de las observaciones a
-    distintos niveles (`mesa`, `circuito`, `departamento` y `provincia`)
-    para poder agrupar. Cada fila corresponde a los resultados de una mesa electoral de una elección determinada. 
+-   Tambien extrajimos los códigos de identificación de las observaciones (`mesa`, `circuito`, `departamento` y `provincia`)
+    para poder agrupar a distintos niveles. Cada fila corresponde a los resultados de una mesa electoral de una elección determinada. 
 
--   Guardamos con `output.var` como dataframe. Repetimos proceso
-    anterior para exportar como `csv`.
+-   Guardamos con `output.var` como dataframe. Repetimos proceso de `(3)`para exportar como `csv`.
 
 
