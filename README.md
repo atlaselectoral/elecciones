@@ -1,6 +1,6 @@
 # Resultados Electorales
 
-Se incluye en este repositorio datos de resultados electorales provinciales (Gobernador, Diputados, Senadores) y nacionales (Diputados y Senadores). 
+El objetivo de este repositorio es consolidar los datos de resultados electorales provinciales (Gobernador, Diputados, Senadores) y nacionales (Diputados y Senadores). 
 
 
 ### Elecciones Nacionales ([repositorio](https://github.com/atlaselectoral/elecciones/tree/master/nacionales))
